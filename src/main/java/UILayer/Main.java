@@ -6,6 +6,7 @@ import java.util.Set;
 
 import CurrentUser.CurrentUserId;
 import DTOLayer.Address;
+import DTOLayer.Admin;
 import DTOLayer.Category;
 import DTOLayer.Customer;
 import DTOLayer.Item;
@@ -79,22 +80,22 @@ public class Main {
 						addRestaurant(sc);
 						break;
 					case "2":
-						addFoodItem(sc);
+						deleteRestaurant(sc);
 						break;
 					case "3":
-						System.out.println("33");
+						addFoodItem(sc);
 						break;
 					case "4":
-						System.out.println("44");
+						deleteFoodItem(sc);
 						break;
 					case "5":
-						System.out.println("55");
+						deleteCustomer(sc);
 						break;
 					case "6":
-						System.out.println("66");
+						addAdmin(sc);
 						break;
 					case "7":
-						System.out.println("77");
+						deleteAdmin(sc);
 						break;
 					case "0":
 						System.out.println("See you soon "+CurrentUserId.getName()+"...Bye!");
@@ -228,7 +229,7 @@ public class Main {
 		String restaurantName = sc.nextLine();
 		System.out.println("Enter the Name of Restaurant Manager Name: ");
 		String restaurantManagerName = sc.nextLine();
-		System.out.println("Enter the Name of Restaurant: ");
+		System.out.println("Enter the Contact Number of Restaurant: ");
 		String restaurantContactNumber = sc.nextLine();
 		System.out.println("Enter Restaurant Building Name:");
 		String buiding = sc.nextLine().trim();
@@ -283,11 +284,86 @@ public class Main {
 		
 		try {
 			L_A_S.addAItem(category, item, restaurantId);
-			System.out.println("Restaurant added...");
+			System.out.println("Item Added to Restaurant Menu...");
+		} catch (SomeThingWentWrong e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	public static void deleteFoodItem(Scanner sc) {
+		System.out.println("Enter the Food Item Id: ");
+		int id =sc.nextInt();
+		sc.nextLine();
+		LogInAndSignUp L_A_S = new LogInAndSignUp();
+		
+		try {
+			L_A_S.deleteAItem(id);
+			System.out.println("Item deleted from Menu...");
 		} catch (SomeThingWentWrong e) {
 			System.out.println(e.getMessage());
 		}
 	}
 	
+	
+	public static void deleteRestaurant(Scanner sc) {
+		System.out.println("Enter the Restaurant Id: ");
+		int restaurantId =sc.nextInt();
+		sc.nextLine();
+		
+		LogInAndSignUp L_A_S = new LogInAndSignUp();
+		
+		try {
+			L_A_S.deleteARestaurant(restaurantId);
+			System.out.println("Restaurant deleted...");
+		} catch (SomeThingWentWrong e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
+	public static void deleteCustomer(Scanner sc) {
+		System.out.println("Enter the customer Id: ");
+		int id =sc.nextInt();
+		sc.nextLine();
+		LogInAndSignUp L_A_S = new LogInAndSignUp();
+		
+		try {
+			L_A_S.deleteACustomer(id);
+			System.out.println("Customer deleted...");
+		} catch (SomeThingWentWrong e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void addAdmin(Scanner sc) {
+		System.out.println("Enter the admin Full Name: ");
+		String adminFullName =sc.nextLine();
+		System.out.println("Enter the admin User Name: ");
+		String adminUserName =sc.nextLine();
+		System.out.println("Enter the admin Password: ");
+		String adminPassword =sc.nextLine();
+		Admin admin = new Admin(adminFullName, adminUserName, adminPassword);
+		
+		LogInAndSignUp L_A_S = new LogInAndSignUp();
+		try {
+			L_A_S.addAAdmin(admin);
+			System.out.println("Admin added...");
+		} catch (SomeThingWentWrong e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void deleteAdmin(Scanner sc) {
+		System.out.println("Enter the admin Id: ");
+		int id =sc.nextInt();
+		sc.nextLine();
+		LogInAndSignUp L_A_S = new LogInAndSignUp();
+		
+		try {
+			L_A_S.deleteAAdmin(id);
+			System.out.println("Admin deleted...");
+		} catch (SomeThingWentWrong e) {
+			System.out.println(e.getMessage());
+		}
+	}
 	
 }

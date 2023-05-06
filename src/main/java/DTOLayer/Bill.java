@@ -1,5 +1,6 @@
 package DTOLayer;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +15,7 @@ public class Bill {
 	private int billId;
 	private double amount;
 	private int totalItems;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "orderId")
 	private Order order;
 	

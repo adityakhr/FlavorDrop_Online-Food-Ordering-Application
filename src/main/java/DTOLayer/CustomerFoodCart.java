@@ -16,7 +16,7 @@ public class CustomerFoodCart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cartId;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="customerId")
 	private Customer customer;
 	@OneToMany(mappedBy = "customerFoodCartDetails",cascade = CascadeType.ALL)

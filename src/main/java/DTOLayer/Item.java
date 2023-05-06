@@ -2,6 +2,7 @@ package DTOLayer;
 
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,10 +19,10 @@ public class Item {
 	private int quantity;
 	private double price;
 	private boolean active;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="restaurant_Id")
 	Restaurant restaurant;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="categoty_id")
 	Category category;
 	public Item() {
