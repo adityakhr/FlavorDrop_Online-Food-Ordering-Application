@@ -131,22 +131,58 @@ public class LogInAndSignUp {
 	
 	
 	public void addAItem(Category category,Item item,int restaurantId) throws SomeThingWentWrong {
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
 		try {
-			DAOInterfaceImple D_I_I = new DAOInterfaceImple();
-			Restaurant restaurant = D_I_I.findRestaurant(restaurantId);
-			
-			
-			
-			
-			
-			
+			D_I_I.addAnItemToRestaurant(category, item, restaurantId);
 		} catch (SomeThingWentWrong e) {
 			throw new SomeThingWentWrong(e.getMessage());
 		}
 	}
+	
+	public void deleteAItem(int id) throws SomeThingWentWrong{
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			D_I_I.deleteItem(id);
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
 
-
+	public void deleteARestaurant(int id) throws SomeThingWentWrong{
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			D_I_I.deleteRestaurent(id);
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
+	
+	public void deleteACustomer(int id) throws SomeThingWentWrong{
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			D_I_I.deleteCustomer(id);
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
+	
+	public void addAAdmin(Admin admin) throws SomeThingWentWrong{
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			D_I_I.addAdmin(admin);
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
 	
 	
+	public void deleteAAdmin(int id) throws SomeThingWentWrong{
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			D_I_I.deleteAdmin(id);
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
 	
 }

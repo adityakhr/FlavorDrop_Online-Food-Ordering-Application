@@ -23,7 +23,7 @@ public class Order {
 	private Bill bill;
 	
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cartId")
 	private CustomerFoodCart customerFoodCartDetails;
 	
