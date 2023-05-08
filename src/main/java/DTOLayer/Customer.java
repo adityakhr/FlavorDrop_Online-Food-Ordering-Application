@@ -33,7 +33,7 @@ public class Customer {
 		// TODO Auto-generated constructor stub
 	}
 	public Customer(String customerFirstName, String customerLastName, String customerGender,
-			String customerEmail, String customerMobileNumber, String customerUserName, String customerPassword,  Address address, CustomerFoodCart customerFoodCart) {
+			String customerEmail, String customerMobileNumber, String customerUserName, String customerPassword,  Address address) {
 		super();
 		this.customerFirstName = customerFirstName;
 		this.customerLastName = customerLastName;
@@ -43,7 +43,6 @@ public class Customer {
 		this.customerUserName = customerUserName;
 		this.customerPassword = customerPassword;
 		this.address = address;
-		this.customerFoodCart = customerFoodCart;
 		this.active = true;
 		
 	}

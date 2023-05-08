@@ -6,6 +6,7 @@ import DTOLayer.Address;
 import DTOLayer.Admin;
 import DTOLayer.Category;
 import DTOLayer.Customer;
+import DTOLayer.CustomerFoodCart;
 import DTOLayer.Item;
 import DTOLayer.Restaurant;
 import Eceptions.SomeThingWentWrong;
@@ -34,4 +35,9 @@ public interface DAOInterface {
 	public void changePassword(String pass) throws SomeThingWentWrong;
 	public void changeMobilenumber(String number) throws SomeThingWentWrong;
 	public void addToCart(int id) throws SomeThingWentWrong;
+	public CustomerFoodCart checkOut() throws SomeThingWentWrong;
+	public void minusTheThings(CustomerFoodCart c_F_C) throws SomeThingWentWrong;
+	
+	
+	
 }

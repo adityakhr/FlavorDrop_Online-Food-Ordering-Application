@@ -10,6 +10,7 @@ import DTOLayer.Address;
 import DTOLayer.Admin;
 import DTOLayer.Category;
 import DTOLayer.Customer;
+import DTOLayer.CustomerFoodCart;
 import DTOLayer.Item;
 import DTOLayer.Restaurant;
 import Eceptions.SomeThingWentWrong;
@@ -295,6 +296,32 @@ public class LogInAndSignUp {
 		} catch (Exception e) {
 			throw new SomeThingWentWrong(e.getMessage());
 		}
+	}
+
+
+
+
+	public CustomerFoodCart checkOut() throws SomeThingWentWrong {
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			CustomerFoodCart C_F_C=D_I_I.checkOut();
+			return C_F_C;
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
+
+
+
+
+	public void minusTheThings(CustomerFoodCart c_F_C) throws SomeThingWentWrong {
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			D_I_I.minusTheThings(c_F_C);
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+		
 	}
 	
 }

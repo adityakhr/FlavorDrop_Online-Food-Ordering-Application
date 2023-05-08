@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Bill {
@@ -16,19 +16,19 @@ public class Bill {
 	private double amount;
 	private int totalItems;
 	private boolean active;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cartId")
-	private CustomerFoodCart foodCartDetails;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "OrderId")
+	private Order1 orders;
 	public Bill() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Bill(double amount, int totalItems, CustomerFoodCart foodCartDetails) {
+	public Bill(double amount, int totalItems, Order1 orders) {
 		super();
 		this.amount = amount;
 		this.totalItems = totalItems;
 		this.active = true;
-		this.foodCartDetails = foodCartDetails;
+		this.orders = orders;
 	}
 	public int getBillId() {
 		return billId;
@@ -48,16 +48,17 @@ public class Bill {
 	public void setTotalItems(int totalItems) {
 		this.totalItems = totalItems;
 	}
-	public boolean isActive() {
+	public boolean getActive() {
 		return active;
 	}
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	public CustomerFoodCart getFoodCartDetails() {
-		return foodCartDetails;
+	public Order1 getOrders() {
+		return orders;
 	}
-	public void setFoodCartDetails(CustomerFoodCart foodCartDetails) {
-		this.foodCartDetails = foodCartDetails;
-	}	
+	public void setOrders(Order1 orders) {
+		this.orders = orders;
+	}
+	
 }

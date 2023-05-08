@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Order1 {
@@ -23,8 +24,12 @@ public class Order1 {
 	private boolean active;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="orderId")
-	@JoinTable(name="customerOders")
+	@JoinTable(name="customerOrders")
 	private Set<Item> items;
+	
+	@OneToOne(mappedBy = "orders",cascade = CascadeType.ALL)
+	private Bill bill;
+	
 	@ManyToOne
 	@JoinColumn(name="foodCartId")
 	private CustomerFoodCart customerFoodCart;
@@ -32,11 +37,12 @@ public class Order1 {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Order1(String orderDate, Set<Item> items, CustomerFoodCart customerFoodCart) {
+	public Order1(String orderDate, Set<Item> items, Bill bill, CustomerFoodCart customerFoodCart) {
 		super();
-		this.orderDate=LocalDate.parse(orderDate);
+		this.orderDate = LocalDate.parse(orderDate);
 		this.active = true;
 		this.items = items;
+		this.bill = bill;
 		this.customerFoodCart = customerFoodCart;
 	}
 	public int getOrderId() {
@@ -45,7 +51,12 @@ public class Order1 {
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
-	
+	public LocalDate getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(LocalDate orderDate) {
+		this.orderDate = orderDate;
+	}
 	public boolean getActive() {
 		return active;
 	}
@@ -58,17 +69,18 @@ public class Order1 {
 	public void setItems(Set<Item> items) {
 		this.items = items;
 	}
+	public Bill getBill() {
+		return bill;
+	}
+	public void setBill(Bill bill) {
+		this.bill = bill;
+	}
 	public CustomerFoodCart getCustomerFoodCart() {
 		return customerFoodCart;
 	}
 	public void setCustomerFoodCart(CustomerFoodCart customerFoodCart) {
 		this.customerFoodCart = customerFoodCart;
 	}
-	public LocalDate getOrderDate() {
-		return orderDate;
-	}
-	public void setOrderDate(LocalDate orderDate) {
-		this.orderDate = orderDate;
-	}
+	
 	
 }

@@ -1,6 +1,6 @@
 package UILayer;
 
-import java.util.HashSet;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -8,7 +8,6 @@ import java.util.Set;
 import CurrentUser.CurrentUserId;
 import DTOLayer.Address;
 import DTOLayer.Admin;
-import DTOLayer.Bill;
 import DTOLayer.Category;
 import DTOLayer.Customer;
 import DTOLayer.CustomerFoodCart;
@@ -19,7 +18,7 @@ import Eceptions.SomeThingWentWrong;
 import ServiceLayer.LogInAndSignUp;
 
 public class Main {
-	public static void main(String[] args) {	
+	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("+ + + + + + + + + + + + + + + + + +\n"
 		+"+   Hello Welcome To FlavorDrop   +\n"
@@ -161,7 +160,7 @@ public class Main {
 		Address address = new Address(buiding, street, area, city, state, country, pincode);
 		
 		
-		Restaurant restaurant = new Restaurant(restaurantName, restaurantManagerName, restaurantContactNumber, address, null);
+		Restaurant restaurant = new Restaurant(restaurantName, restaurantManagerName, restaurantContactNumber, address);
 		
 		LogInAndSignUp L_A_S = new LogInAndSignUp();
 		
@@ -175,58 +174,59 @@ public class Main {
 	
 	
 	public static void addFoodItem(Scanner sc) {
-		System.out.println("Enter the Item Name: ");
-		String itemName = sc.nextLine().trim();
-		System.out.println("Enter the Quantity of Item: ");
-		int quantity =sc.nextInt(); 
-		sc.nextLine();
-		System.out.println("Enter the Price of Item: ");
-		double price = sc.nextDouble();
-		sc.nextLine();
-		System.out.println("Enter Restaurant Id:");
-		int restaurantId = sc.nextInt();
-		sc.nextLine();
-		System.out.println("Enter Category Name:");
-		String categoryName = sc.nextLine().trim();
-		Category category = new Category(categoryName, null);
-		Item item = new Item(itemName, quantity, price, null, category);
-		
-		
-		LogInAndSignUp L_A_S = new LogInAndSignUp();
-		
 		try {
+			
+			System.out.println("Enter the Item Name: ");
+			String itemName = sc.nextLine().trim();
+			System.out.println("Enter the Quantity of Item: ");
+			int quantity =sc.nextInt(); 
+			sc.nextLine();
+			System.out.println("Enter the Price of Item: ");
+			double price = sc.nextDouble();
+			sc.nextLine();
+			System.out.println("Enter Restaurant Id:");
+			int restaurantId = sc.nextInt();
+			sc.nextLine();
+			System.out.println("Enter Category Name:");
+			String categoryName = sc.nextLine().trim();
+			Category category = new Category(categoryName, null);
+			Item item = new Item(itemName, quantity, price, null, category);
+			
+			
+			LogInAndSignUp L_A_S = new LogInAndSignUp();
+			
+			
 			L_A_S.addAItem(category, item, restaurantId);
 			System.out.println("Item Added to Restaurant Menu...");
-		} catch (SomeThingWentWrong e) {
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 	}
 	public static void deleteFoodItem(Scanner sc) {
-		System.out.println("Enter the Food Item Id: ");
-		int id =sc.nextInt();
-		sc.nextLine();
-		LogInAndSignUp L_A_S = new LogInAndSignUp();
-		
 		try {
+			System.out.println("Enter the Food Item Id: ");
+			int id =sc.nextInt();
+			sc.nextLine();
+			LogInAndSignUp L_A_S = new LogInAndSignUp();
 			L_A_S.deleteAItem(id);
 			System.out.println("Item deleted from Menu...");
-		} catch (SomeThingWentWrong e) {
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 	}
 	
 	
 	public static void deleteRestaurant(Scanner sc) {
-		System.out.println("Enter the Restaurant Id: ");
-		int restaurantId =sc.nextInt();
-		sc.nextLine();
-		
-		LogInAndSignUp L_A_S = new LogInAndSignUp();
-		
 		try {
+			System.out.println("Enter the Restaurant Id: ");
+			int restaurantId =sc.nextInt();
+			sc.nextLine();
+			
+			LogInAndSignUp L_A_S = new LogInAndSignUp();
+			
 			L_A_S.deleteARestaurant(restaurantId);
 			System.out.println("Restaurant deleted...");
-		} catch (SomeThingWentWrong e) {
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -314,15 +314,14 @@ public class Main {
 	}
 	
 	public static void deleteCustomer(Scanner sc) {
-		System.out.println("Enter the customer Id: ");
-		int id =sc.nextInt();
-		sc.nextLine();
-		LogInAndSignUp L_A_S = new LogInAndSignUp();
-		
 		try {
+			System.out.println("Enter the customer Id: ");
+			int id =sc.nextInt();
+			sc.nextLine();
+			LogInAndSignUp L_A_S = new LogInAndSignUp();
 			L_A_S.deleteACustomer(id);
 			System.out.println("Customer deleted...");
-		} catch (SomeThingWentWrong e) {
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -346,15 +345,15 @@ public class Main {
 	}
 	
 	public static void deleteAdmin(Scanner sc) {
-		System.out.println("Enter the admin Id: ");
-		int id =sc.nextInt();
-		sc.nextLine();
-		LogInAndSignUp L_A_S = new LogInAndSignUp();
-		
 		try {
+			System.out.println("Enter the admin Id: ");
+			int id =sc.nextInt();
+			sc.nextLine();
+			LogInAndSignUp L_A_S = new LogInAndSignUp();
+			
 			L_A_S.deleteAAdmin(id);
 			System.out.println("Admin deleted...");
-		} catch (SomeThingWentWrong e) {
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -400,10 +399,7 @@ public class Main {
 		String pincode = sc.nextLine().trim();
 		
 		Address address = new Address(buiding, street, area, city, state, country, pincode);
-		Set<Order1>orders = new HashSet<>();
-		Set<Bill>bills = new HashSet<>();
-		CustomerFoodCart C_F_C = new CustomerFoodCart(null, orders, bills);
-		Customer customer = new Customer(firstName, lastName, gender, email, mobile,userName,password, address, C_F_C);
+		Customer customer = new Customer(firstName, lastName, gender, email, mobile,userName,password, address);
 		
 		LogInAndSignUp L_A_S = new LogInAndSignUp();
 		
@@ -442,7 +438,7 @@ public class Main {
 						orderFood(sc);
 						break;
 					case "3":
-						System.out.println("33");
+						checkOut();
 						break;
 					case "4":
 						updateDetails(sc);
@@ -479,6 +475,10 @@ public class Main {
 //	::::::::Customers Functionalities::::::::
 
 	
+	
+
+
+
 	private static void listOfRestaurantAndFoodItems() {
 		Scanner sc =new Scanner(System.in);
 		LogInAndSignUp L_A_S = new LogInAndSignUp();
@@ -648,16 +648,67 @@ public class Main {
 	
 	
 	private static void orderFood(Scanner sc) {
-		System.out.println("Enter the id of food item");
-		int id  = sc.nextInt();
-		sc.nextLine();
-		LogInAndSignUp L_A_S = new LogInAndSignUp();
 		try {
+			System.out.println("Enter the id of food item");
+			int id  = sc.nextInt();
+			sc.nextLine();
+			LogInAndSignUp L_A_S = new LogInAndSignUp();
 			L_A_S.addToCart(id);
 			System.out.println("Added to cart...");
-		} catch (SomeThingWentWrong e) {
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 	}
+	
+	
+	
+	private static void checkOut() {
+		try {
+			LogInAndSignUp L_A_S = new LogInAndSignUp();
+			CustomerFoodCart C_F_C=L_A_S.checkOut();
+			if(C_F_C.getOrder()==null) {
+				System.err.println("No item found with your Cart");
+			}else {
+				double amount=0;
+				Set<Order1> orders= C_F_C.getOrder();
+				for(Order1 or: orders) {
+					if(or.getActive() && or.getItems().size()>0) {
+						for(Item it:or.getItems()) {
+							System.out.println(it);
+							amount+=it.getPrice();
+						}
+						
+					}
+				}
+				
+				System.out.println("\nAmount: "+amount+"\nThese are the items in your cart...Do you want to make Payment?");
+				Scanner sc = new Scanner(System.in);
+				String k = sc.nextLine().trim();
+				switch(k) {
+					case"y":
+						L_A_S.minusTheThings(C_F_C);
+						System.out.println("Puchase Done...");
+						break;
+					case"Y":
+						L_A_S.minusTheThings(C_F_C);
+						System.out.println("Puchase Done...");
+						break;
+					case"N":
+						System.out.println("All Right...");
+						break;
+					case"n":
+						System.out.println("All Right...");
+						break;
+					default:
+						System.err.println("Wrong Selection...");
+				}
+			}
+			System.out.println("Payment Successful...");
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		
+	}
+
 	
 }
