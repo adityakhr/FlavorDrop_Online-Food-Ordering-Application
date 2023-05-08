@@ -669,6 +669,7 @@ public class Main {
 			if(C_F_C.getOrder()==null) {
 				System.err.println("No item found with your Cart");
 			}else {
+				int count=0;
 				double amount=0;
 				Set<Order1> orders= C_F_C.getOrder();
 				for(Order1 or: orders) {
@@ -677,33 +678,35 @@ public class Main {
 							System.out.println(it);
 							amount+=it.getPrice();
 						}
-						
+						++count;
 					}
 				}
-				
-				System.out.println("\nAmount: "+amount+"\nThese are the items in your cart...Do you want to make Payment?");
-				Scanner sc = new Scanner(System.in);
-				String k = sc.nextLine().trim();
-				switch(k) {
-					case"y":
-						L_A_S.minusTheThings(C_F_C);
-						System.out.println("Puchase Done...");
-						break;
-					case"Y":
-						L_A_S.minusTheThings(C_F_C);
-						System.out.println("Puchase Done...");
-						break;
-					case"N":
-						System.out.println("All Right...");
-						break;
-					case"n":
-						System.out.println("All Right...");
-						break;
-					default:
-						System.err.println("Wrong Selection...");
+				if(count>0) {
+					System.out.println("\nAmount: "+amount+"\nThese are the items in your cart...Do you want to make Payment?");
+					Scanner sc = new Scanner(System.in);
+					String k = sc.nextLine().trim();
+					switch(k) {
+						case"y":
+							L_A_S.minusTheThings(C_F_C);
+							System.out.println("Puchase Done...");
+							break;
+						case"Y":
+							L_A_S.minusTheThings(C_F_C);
+							System.out.println("Puchase Done...");
+							break;
+						case"N":
+							System.out.println("All Right...");
+							break;
+						case"n":
+							System.out.println("All Right...");
+							break;
+						default:
+							System.err.println("Wrong Selection...");
+					}
+				}else {
+					System.err.println("No order found");
 				}
 			}
-			System.out.println("Payment Successful...");
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}

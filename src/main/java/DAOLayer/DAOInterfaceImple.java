@@ -487,7 +487,7 @@ public class DAOInterfaceImple implements DAOInterface {
 		}
 		
 	}
-
+	//Delteing clonned...
 	@Override
 	public void minusTheThings(CustomerFoodCart C_F_C) throws SomeThingWentWrong {
 		EntityManager etm = Utility.getManager();
