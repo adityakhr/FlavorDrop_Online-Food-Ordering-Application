@@ -15,39 +15,50 @@ public class Bill {
 	private int billId;
 	private double amount;
 	private int totalItems;
+	private boolean active;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "orderId")
-	private Order order;
-	
+	@JoinColumn(name = "OrderId")
+	private Order1 orders;
 	public Bill() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public Bill(double amount,int totalItems) {
+	public Bill(double amount, int totalItems, Order1 orders) {
 		super();
 		this.amount = amount;
 		this.totalItems = totalItems;
+		this.active = true;
+		this.orders = orders;
 	}
-
-	@Override
-	public String toString() {
-		return "Bill [billId=" + billId + ", amount=" + amount + ", totalItems=" + totalItems + "]";
-	}
-
 	public int getBillId() {
 		return billId;
 	}
-
 	public void setBillId(int billId) {
 		this.billId = billId;
 	}
-
 	public double getAmount() {
 		return amount;
 	}
-
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
+	public int getTotalItems() {
+		return totalItems;
+	}
+	public void setTotalItems(int totalItems) {
+		this.totalItems = totalItems;
+	}
+	public boolean getActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	public Order1 getOrders() {
+		return orders;
+	}
+	public void setOrders(Order1 orders) {
+		this.orders = orders;
+	}
+	
 }

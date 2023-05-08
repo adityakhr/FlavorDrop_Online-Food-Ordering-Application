@@ -6,9 +6,11 @@ import java.util.Set;
 
 import CurrentUser.CurrentUserId;
 import DAOLayer.DAOInterfaceImple;
+import DTOLayer.Address;
 import DTOLayer.Admin;
 import DTOLayer.Category;
 import DTOLayer.Customer;
+import DTOLayer.CustomerFoodCart;
 import DTOLayer.Item;
 import DTOLayer.Restaurant;
 import Eceptions.SomeThingWentWrong;
@@ -100,12 +102,22 @@ public class LogInAndSignUp {
 	}
 	
 	
-	
-	
-	
+	public boolean checkCustomer(List<Customer>list, String userName) {
+		for(Customer cu: list) {
+			if(cu.getCustomerUserName().equals(userName)) {
+				return false;
+			}
+		}
+		return true;
+	}
 	public void customerSignUp(Customer customer) throws SomeThingWentWrong{
 		if(customer.getCustomerMobileNumber().length()!=10) {
 			throw new SomeThingWentWrong("Mobile number is not valid...");
+		}
+		for(int i=0 ; i<customer.getCustomerMobileNumber().length();++i) {
+			if(!(Character.isDigit(customer.getCustomerMobileNumber().charAt(i)))) {
+				throw new SomeThingWentWrong("Mobile number is not valid...");
+			}
 		}
 		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
 		try {
@@ -115,10 +127,22 @@ public class LogInAndSignUp {
 		}
 	}
 
-
+	public boolean checkRestaurant(List<Restaurant>list, String restaurantName) {
+		for(Restaurant re: list) {
+			if(re.getRestaurantName().equals(restaurantName)) {
+				return false;
+			}
+		}
+		return true;
+	}
 	public void addARestaurant(Restaurant restaurant) throws SomeThingWentWrong{
 		if(restaurant.getRestaurantCOntactNumber().length()!=10) {
 			throw new SomeThingWentWrong("Restaurant's Mobile number is not valid...");
+		}
+		for(int i=0 ; i<restaurant.getRestaurantCOntactNumber().length();++i) {
+			if(!(Character.isDigit(restaurant.getRestaurantCOntactNumber().charAt(i)))) {
+				throw new SomeThingWentWrong("Contact number is not valid...");
+			}
 		}
 		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
 		try {
@@ -157,6 +181,16 @@ public class LogInAndSignUp {
 		}
 	}
 	
+	public List<Customer> seeCustomerDetails() throws SomeThingWentWrong{
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			List<Customer> customers=D_I_I.seeCustomerDetails();
+			return customers;
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
+	
 	public void deleteACustomer(int id) throws SomeThingWentWrong{
 		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
 		try {
@@ -183,6 +217,111 @@ public class LogInAndSignUp {
 		} catch (Exception e) {
 			throw new SomeThingWentWrong(e.getMessage());
 		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	::::Customer Functionality::::
+	
+	
+	
+	public List<Restaurant> ListOfRestaurantAndFood() throws SomeThingWentWrong {
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			List<Restaurant> restaurants = D_I_I.ListOfRestaurantAndFoodItems();
+			if(restaurants.size()==0) {
+				throw new SomeThingWentWrong("No Restaurant found...");
+			}
+			return restaurants;
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
+	
+	public void changeEmail(String email) throws SomeThingWentWrong {
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			D_I_I.changeEmail(email);
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
+	public void changeAddress(Address add) throws SomeThingWentWrong {
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			D_I_I.changeAddress(add);
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
+	public void changeMobile(String mobile) throws SomeThingWentWrong {
+		for(int i=0 ; i<mobile.length();++i) {
+			if(!(Character.isDigit(mobile.charAt(i)))) {
+				throw new SomeThingWentWrong("Contact number is not valid...");
+			}
+		}
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			D_I_I.changeMobilenumber(mobile);
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
+	public void changePassword(String pass) throws SomeThingWentWrong {
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			D_I_I.changePassword(pass);
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
+	
+	
+	
+	
+	public static void addToCart(int id) throws SomeThingWentWrong {
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			D_I_I.addToCart(id);
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
+
+
+
+
+	public CustomerFoodCart checkOut() throws SomeThingWentWrong {
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			CustomerFoodCart C_F_C=D_I_I.checkOut();
+			return C_F_C;
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+	}
+
+
+
+
+	public void minusTheThings(CustomerFoodCart c_F_C) throws SomeThingWentWrong {
+		DAOInterfaceImple D_I_I = new DAOInterfaceImple();
+		try {
+			D_I_I.minusTheThings(c_F_C);
+		} catch (Exception e) {
+			throw new SomeThingWentWrong(e.getMessage());
+		}
+		
 	}
 	
 }

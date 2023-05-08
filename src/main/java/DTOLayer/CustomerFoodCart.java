@@ -16,19 +16,21 @@ public class CustomerFoodCart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cartId;
+	private boolean active;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="customerId")
 	private Customer customer;
-	@OneToMany(mappedBy = "customerFoodCartDetails",cascade = CascadeType.ALL)
-	private Set<Order> orders;
+	@OneToMany(mappedBy = "customerFoodCart",cascade = CascadeType.ALL)
+	private Set<Order1> order;
 	public CustomerFoodCart() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public CustomerFoodCart(Customer customer, Set<Order> orders) {
+	public CustomerFoodCart( Customer customer, Set<Order1> order) {
 		super();
+		this.active = true;
 		this.customer = customer;
-		this.orders = orders;
+		this.order = order;
 	}
 	public int getCartId() {
 		return cartId;
@@ -36,20 +38,24 @@ public class CustomerFoodCart {
 	public void setCartId(int cartId) {
 		this.cartId = cartId;
 	}
+	public boolean getActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 	public Customer getCustomer() {
 		return customer;
 	}
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public Set<Order> getOrders() {
-		return orders;
+	public Set<Order1> getOrder() {
+		return order;
 	}
-	public void setOrders(Set<Order> orders) {
-		this.orders = orders;
+	public void setOrder(Set<Order1> order) {
+		this.order=order;
 	}
-	@Override
-	public String toString() {
-		return "CustomerFoodCart [cartId=" + cartId + ", customer=" + customer + "]";
-	}
+	
+	
 }

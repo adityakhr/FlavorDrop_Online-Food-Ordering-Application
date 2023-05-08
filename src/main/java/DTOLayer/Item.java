@@ -29,14 +29,14 @@ public class Item {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Item(String itemName, int quantity, double price, Restaurant restaurant, Category category, boolean flag) {
+	public Item(String itemName, int quantity, double price, Restaurant restaurant, Category category) {
 		super();
 		this.itemName = itemName;
 		this.quantity = quantity;
 		this.price = price;
 		this.restaurant = restaurant;
 		this.category = category;
-		this.active=flag;
+		this.active=true;
 	}
 	public int getItemId() {
 		return itemId;
@@ -82,7 +82,7 @@ public class Item {
 	}
 	@Override
 	public String toString() {
-		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", quantity=" + quantity + ", price=" + price
+		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", quantity=" + quantity + ", price=" + price+ ", category=" + category.getCategoryName()
 				+ "]";
 	}
 	@Override
