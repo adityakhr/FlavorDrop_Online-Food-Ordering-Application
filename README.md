@@ -24,6 +24,7 @@ Admin Functionality.....
   <br>
   <br>
   for using admin functionality you have to login as Admin.<br>
+  Admin can do....
   <br>
     1 -> Add Restaurant<br>
 	2 -> Delete Restaurant<br>
@@ -41,6 +42,7 @@ Customer Functionality.....
 <br>
   for using Customer Functionality you have to login as Customer(if you have valid credential or you can Sign Up first and then Log In).
   <br>
+  Customer can do...
   <br>
     1 -> List of restaurants & their food items<br>
 	2 -> Order food<br>
