@@ -30,14 +30,14 @@ public class Restaurant {
 		// TODO Auto-generated constructor stub
 	}
 	public Restaurant(String restaurantName, String restaurantManagerName,
-			String restaurantCOntactNumber, Address restaurantAddress, Set<Item> items, boolean flag) {
+			String restaurantCOntactNumber, Address restaurantAddress, Set<Item> items) {
 		super();
 		this.restaurantName = restaurantName;
 		this.restaurantManagerName = restaurantManagerName;
 		this.restaurantContactNumber = restaurantCOntactNumber;
 		this.restaurantAddress = restaurantAddress;
 		this.items = items;
-		this.active=flag;
+		this.active=true;
 	}
 	public int getRestaurantId() {
 		return restaurantId;

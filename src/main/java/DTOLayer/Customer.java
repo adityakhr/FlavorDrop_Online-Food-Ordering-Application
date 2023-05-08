@@ -33,7 +33,7 @@ public class Customer {
 		// TODO Auto-generated constructor stub
 	}
 	public Customer(String customerFirstName, String customerLastName, String customerGender,
-			String customerEmail, String customerMobileNumber, String customerUserName, String customerPassword,  Address address,boolean flag) {
+			String customerEmail, String customerMobileNumber, String customerUserName, String customerPassword,  Address address, CustomerFoodCart customerFoodCart) {
 		super();
 		this.customerFirstName = customerFirstName;
 		this.customerLastName = customerLastName;
@@ -43,7 +43,8 @@ public class Customer {
 		this.customerUserName = customerUserName;
 		this.customerPassword = customerPassword;
 		this.address = address;
-		this.active = flag;
+		this.customerFoodCart = customerFoodCart;
+		this.active = true;
 		
 	}
 
@@ -112,6 +113,15 @@ public class Customer {
 	}
 	
 	
+	public CustomerFoodCart getCustomerFoodCart() {
+		return customerFoodCart;
+	}
+	public void setCustomerFoodCart(CustomerFoodCart customerFoodCart) {
+		this.customerFoodCart = customerFoodCart;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 	public Address getAddress() {
 		return address;
 	}
@@ -131,7 +141,7 @@ public class Customer {
 		return "Customer [customerId=" + customerId + ", customerFirstName=" + customerFirstName + ", customerLastName="
 				+ customerLastName + ", customerGender=" + customerGender + ", customerEmail=" + customerEmail
 				+ ", customerMobileNumber=" + customerMobileNumber + ", customerUserName=" + customerUserName
-				+ ", active=" + active + "]";
+				+ "]";
 	}
 	
 }
