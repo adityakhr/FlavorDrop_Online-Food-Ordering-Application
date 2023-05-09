@@ -2,7 +2,7 @@ package DTOLayer;
 
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -25,7 +25,7 @@ public class Order1 {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="orderId")
 	@JoinTable(name="customerOrders")
-	private Set<Item> items;
+	private List<Item> items;
 	
 	@OneToOne(mappedBy = "orders",cascade = CascadeType.ALL)
 	private Bill bill;
@@ -37,7 +37,7 @@ public class Order1 {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Order1(String orderDate, Set<Item> items, Bill bill, CustomerFoodCart customerFoodCart) {
+	public Order1(String orderDate, List<Item> items, Bill bill, CustomerFoodCart customerFoodCart) {
 		super();
 		this.orderDate = LocalDate.parse(orderDate);
 		this.active = true;
@@ -63,10 +63,10 @@ public class Order1 {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	public Set<Item> getItems() {
+	public List<Item> getItems() {
 		return items;
 	}
-	public void setItems(Set<Item> items) {
+	public void setItems(List<Item> items) {
 		this.items = items;
 	}
 	public Bill getBill() {

@@ -2,6 +2,7 @@ package DAOLayer;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -135,14 +136,14 @@ public class DAOInterfaceImple implements DAOInterface {
 			throw new SomeThingWentWrong("No Restaurant Found");
 		}
 		Set<Item> items = new HashSet<Item>();
-		if(!restaurant.getItems().isEmpty()) {
+		if(restaurant.getItems()!=null) {
 			for(Item it:restaurant.getItems()) {
 				items.add(it);
 			}
 		}
 		item.setRestaurant(restaurant);
 		
-		Category cat = etm.find(Category.class, (category.getCategoryName().equals("Veg")||category.getCategoryName().equals("veg"))?1:2);
+		Category cat = etm.find(Category.class, Integer.parseInt(category.getCategoryName()));
 		if(cat!=null) {
 			Set<Item> items2 = new HashSet<Item>();
 			if(cat.getItems()!=null) {
@@ -423,7 +424,6 @@ public class DAOInterfaceImple implements DAOInterface {
 			C_F_C.setCustomer(customer);
 		}
 		
-		
 		Order1 order = new Order1();
 		
 		
@@ -435,10 +435,9 @@ public class DAOInterfaceImple implements DAOInterface {
 		bill.setActive(true);
 		bill.setOrders(order);
 		
-		
 		order.setOrderDate(LocalDate.now());
 		order.setActive(true);
-		Set<Item> items = new HashSet<>();
+		List<Item> items = new ArrayList<>();
 		if(order.getItems()!=null) {
 			for(Item it : order.getItems()) {
 				items.add(it);
@@ -451,14 +450,14 @@ public class DAOInterfaceImple implements DAOInterface {
 		
 		Set<Order1> orders = new HashSet<Order1>();
 		if(customer.getCustomerFoodCart()!=null && customer.getCustomerFoodCart().getOrder()!=null) {
-			
 			for(Order1 it:customer.getCustomerFoodCart().getOrder()) {
-				orders.add(it);
+				if(it.getActive()) {
+					orders.add(it);
+				}
 			}
 		}
 		orders.add(order);
 		C_F_C.setOrder(orders);
-		
 		
 		EntityTransaction ett = etm.getTransaction();
 		ett.begin();
@@ -487,7 +486,6 @@ public class DAOInterfaceImple implements DAOInterface {
 		}
 		
 	}
-
 	@Override
 	public void minusTheThings(CustomerFoodCart C_F_C) throws SomeThingWentWrong {
 		EntityManager etm = Utility.getManager();

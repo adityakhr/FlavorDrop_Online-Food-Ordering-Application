@@ -187,9 +187,10 @@ public class Main {
 			System.out.println("Enter Restaurant Id:");
 			int restaurantId = sc.nextInt();
 			sc.nextLine();
-			System.out.println("Enter Category Name:");
-			String categoryName = sc.nextLine().trim();
-			Category category = new Category(categoryName, null);
+			System.out.println("Enter Category Name(1==Veg/2==NonVeg):");
+			int categoryName = sc.nextInt();
+			sc.nextLine();
+			Category category = new Category(""+categoryName, null);
 			Item item = new Item(itemName, quantity, price, null, category);
 			
 			
@@ -237,7 +238,7 @@ public class Main {
 		
 		try {
 			List<Customer>customers=L_A_S.seeCustomerDetails();
-			if(!customers.isEmpty()) {
+			if(customers!=null) {
 				for(Customer rs: customers) {
 					System.out.println("Customer-Id: "+rs.getCustomerId()+", Customer-Name: "+rs.getCustomerFirstName()+" "+rs.getCustomerLastName());
 				}
@@ -251,14 +252,12 @@ public class Main {
 						int count2=0;
 						for(Customer rs: customers) {
 							if(String.valueOf(rs.getCustomerId()).equals(id) && rs.getActive()) {
-//								for(Order order:rs.getCustomerFoodCart().getOrder()) {
-//									if(order.getActive()){
-//										for(Item item: order.getItems()) {
-//											System.out.println(item);
-//											++count2;
-//										}
-//									}
-//								}
+								for(Order1 order:rs.getCustomerFoodCart().getOrder()) {
+									for(Item item: order.getItems()) {
+										System.out.println(item);
+										++count2;
+									}
+								}
 								++count;
 							}
 						}
@@ -276,14 +275,12 @@ public class Main {
 						int count21=0;
 						for(Customer rs: customers) {
 							if(String.valueOf(rs.getCustomerId()).equals(id1) && rs.getActive()) {
-//								for(Order order:rs.getCustomerFoodCart().getOrder()) {
-//									if(order.getActive()){
-//										for(Item item: order.getItems()) {
-//											System.out.println(item);
-//											++count21;
-//										}
-//									}
-//								}
+								for(Order1 order:rs.getCustomerFoodCart().getOrder()) {
+									for(Item item: order.getItems()) {
+										System.out.println(item);
+										++count21;
+									}
+								}
 								++count1;
 							}
 						}
@@ -483,66 +480,74 @@ public class Main {
 		Scanner sc =new Scanner(System.in);
 		LogInAndSignUp L_A_S = new LogInAndSignUp();
 		try {
+			int count13=0;
 			List<Restaurant> restaurant=L_A_S.ListOfRestaurantAndFood();
 			for(Restaurant rs: restaurant) {
-				System.out.println("Restaurant-Id: "+rs.getRestaurantId()+", Restaurant-Name: "+rs.getRestaurantName());
+				if(rs.getActive()) {
+					System.out.println("Restaurant-Id: "+rs.getRestaurantId()+", Restaurant-Name: "+rs.getRestaurantName());
+					++count13;
+				}
 			}
-			System.out.println("Do you want to have a look of Items? ((Y/N)||(y/n))");
-			String ans=sc.nextLine().trim();
-			switch(ans) {
-				case "Y":
-					System.out.println("Please enter the restaurant id: ");
-					String id = sc.nextLine().trim();
-					int count=0;
-					int count2=0;
-					for(Restaurant rs: restaurant) {
-						if(String.valueOf(rs.getRestaurantId()).equals(id)) {
-							for(Item items:rs.getItems()) {
-								System.out.println(items);
-								++count2;
-							}
-							++count;
-						}
-					}
-					if(count2==0) {
-						System.err.println("No Item found...");
-					}
-					if(count==0) {
-						System.err.println("No restaurant found with this id...");
-					}
-					break;
-				case "y":
-					System.out.println("Please enter the restaurant id: ");
-					String id1 = sc.nextLine().trim();
-					int count1=0;
-					int count12=0;
-					for(Restaurant rs: restaurant) {
-						if(String.valueOf(rs.getRestaurantId()).equals(id1)) {
-							for(Item items:rs.getItems()) {
-								if(items.getActive()) {
+			if(count13>0) {
+				System.out.println("Do you want to have a look of Items? ((Y/N)||(y/n))");
+				String ans=sc.nextLine().trim();
+				switch(ans) {
+					case "Y":
+						System.out.println("Please enter the restaurant id: ");
+						String id = sc.nextLine().trim();
+						int count=0;
+						int count2=0;
+						for(Restaurant rs: restaurant) {
+							if(String.valueOf(rs.getRestaurantId()).equals(id)) {
+								for(Item items:rs.getItems()) {
 									System.out.println(items);
-									++count12;
+									++count2;
 								}
+								++count;
 							}
-							++count1;
 						}
-					}
-					if(count12==0) {
-						System.err.println("No Item found...");
-					}
-					if(count1==0) {
-						System.err.println("No restaurant found with this id...");
-					}
-					break;
-				case "N":
-					System.out.println("All right...");
-					break;
-				case "n":
-					System.out.println("All right...");
-					break;
-				default:
-					System.err.println("You haven't selected correct option...");
-						
+						if(count2==0) {
+							System.err.println("No Item found...");
+						}
+						if(count==0) {
+							System.err.println("No restaurant found with this id...");
+						}
+						break;
+					case "y":
+						System.out.println("Please enter the restaurant id: ");
+						String id1 = sc.nextLine().trim();
+						int count1=0;
+						int count12=0;
+						for(Restaurant rs: restaurant) {
+							if(String.valueOf(rs.getRestaurantId()).equals(id1)) {
+								for(Item items:rs.getItems()) {
+									if(items.getActive()) {
+										System.out.println(items);
+										++count12;
+									}
+								}
+								++count1;
+							}
+						}
+						if(count12==0) {
+							System.err.println("No Item found...");
+						}
+						if(count1==0) {
+							System.err.println("No restaurant found with this id...");
+						}
+						break;
+					case "N":
+						System.out.println("All right...");
+						break;
+					case "n":
+						System.out.println("All right...");
+						break;
+					default:
+						System.err.println("You haven't selected correct option...");		
+				}
+			}
+			else{
+				System.err.println("No restaurant found...");
 			}
 		} catch (SomeThingWentWrong e) {
 			System.err.println(e.getMessage());
@@ -669,6 +674,7 @@ public class Main {
 			if(C_F_C.getOrder()==null) {
 				System.err.println("No item found with your Cart");
 			}else {
+				int count=0;
 				double amount=0;
 				Set<Order1> orders= C_F_C.getOrder();
 				for(Order1 or: orders) {
@@ -677,33 +683,35 @@ public class Main {
 							System.out.println(it);
 							amount+=it.getPrice();
 						}
-						
+						++count;
 					}
 				}
-				
-				System.out.println("\nAmount: "+amount+"\nThese are the items in your cart...Do you want to make Payment?");
-				Scanner sc = new Scanner(System.in);
-				String k = sc.nextLine().trim();
-				switch(k) {
-					case"y":
-						L_A_S.minusTheThings(C_F_C);
-						System.out.println("Puchase Done...");
-						break;
-					case"Y":
-						L_A_S.minusTheThings(C_F_C);
-						System.out.println("Puchase Done...");
-						break;
-					case"N":
-						System.out.println("All Right...");
-						break;
-					case"n":
-						System.out.println("All Right...");
-						break;
-					default:
-						System.err.println("Wrong Selection...");
+				if(count>0) {
+					System.out.println("\nAmount: "+amount+"\nThese are the items in your cart...Do you want to make Payment?");
+					Scanner sc = new Scanner(System.in);
+					String k = sc.nextLine().trim();
+					switch(k) {
+						case"y":
+							L_A_S.minusTheThings(C_F_C);
+							System.out.println("Puchase Done...");
+							break;
+						case"Y":
+							L_A_S.minusTheThings(C_F_C);
+							System.out.println("Puchase Done...");
+							break;
+						case"N":
+							System.out.println("All Right...");
+							break;
+						case"n":
+							System.out.println("All Right...");
+							break;
+						default:
+							System.err.println("Wrong Selection...");
+					}
+				}else {
+					System.err.println("No order found");
 				}
 			}
-			System.out.println("Payment Successful...");
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
