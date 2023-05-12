@@ -1,7 +1,6 @@
 package DTOLayer;
 
-import java.util.Set;
-
+import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,12 +20,12 @@ public class CustomerFoodCart {
 	@JoinColumn(name="customerId")
 	private Customer customer;
 	@OneToMany(mappedBy = "customerFoodCart",cascade = CascadeType.ALL)
-	private Set<Order1> order;
+	private List<Order1> order;
 	public CustomerFoodCart() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public CustomerFoodCart( Customer customer, Set<Order1> order) {
+	public CustomerFoodCart( Customer customer, List<Order1> order) {
 		super();
 		this.active = true;
 		this.customer = customer;
@@ -50,10 +49,10 @@ public class CustomerFoodCart {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public Set<Order1> getOrder() {
+	public List<Order1> getOrder() {
 		return order;
 	}
-	public void setOrder(Set<Order1> order) {
+	public void setOrder(List<Order1> order) {
 		this.order=order;
 	}
 	

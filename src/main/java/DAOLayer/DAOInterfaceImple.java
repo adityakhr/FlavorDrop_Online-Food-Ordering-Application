@@ -448,17 +448,15 @@ public class DAOInterfaceImple implements DAOInterface {
 		order.setBill(bill);
 		order.setCustomerFoodCart(C_F_C);
 		
-		Set<Order1> orders = new HashSet<Order1>();
+		List<Order1> orders = new ArrayList<Order1>();
 		if(customer.getCustomerFoodCart()!=null && customer.getCustomerFoodCart().getOrder()!=null) {
 			for(Order1 it:customer.getCustomerFoodCart().getOrder()) {
-				if(it.getActive()) {
-					orders.add(it);
-				}
+				orders.add(it);
 			}
 		}
 		orders.add(order);
 		C_F_C.setOrder(orders);
-		
+		C_F_C.setActive(true);
 		EntityTransaction ett = etm.getTransaction();
 		ett.begin();
 		try {
