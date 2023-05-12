@@ -3,8 +3,6 @@ package UILayer;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
-
 import CurrentUser.CurrentUserId;
 import DTOLayer.Address;
 import DTOLayer.Admin;
@@ -251,7 +249,7 @@ public class Main {
 						int count=0;
 						int count2=0;
 						for(Customer rs: customers) {
-							if(String.valueOf(rs.getCustomerId()).equals(id) && rs.getActive()) {
+							if(String.valueOf(rs.getCustomerId()).equals(id) && rs.getActive()&& rs.getCustomerFoodCart().getOrder()!=null) {
 								for(Order1 order:rs.getCustomerFoodCart().getOrder()) {
 									for(Item item: order.getItems()) {
 										System.out.println(item);
@@ -274,7 +272,7 @@ public class Main {
 						int count1=0;
 						int count21=0;
 						for(Customer rs: customers) {
-							if(String.valueOf(rs.getCustomerId()).equals(id1) && rs.getActive()) {
+							if(String.valueOf(rs.getCustomerId()).equals(id1) && rs.getActive()&& rs.getCustomerFoodCart().getOrder()!=null) {
 								for(Order1 order:rs.getCustomerFoodCart().getOrder()) {
 									for(Item item: order.getItems()) {
 										System.out.println(item);
@@ -676,7 +674,7 @@ public class Main {
 			}else {
 				int count=0;
 				double amount=0;
-				Set<Order1> orders= C_F_C.getOrder();
+				List<Order1> orders= C_F_C.getOrder();
 				for(Order1 or: orders) {
 					if(or.getActive() && or.getItems().size()>0) {
 						for(Item it:or.getItems()) {
