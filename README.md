@@ -7,13 +7,21 @@ Welcome to the Online Food Ordering Application System, I named it as "FlavorDro
 <br>
 Here in this project you can find some entity classes which are as follows..<br>
 1. admin
+<br>
 2. bill
+<br>
 3. category
+<br>
 4. customer
+<br>
 5. customerfoodcart
+<br>
 6. customerorders
+<br>
 7. item
+<br>
 8. order
+<br>
 9. restaurant
 <br>
 As the names are indicating they are entity classes for generating the various tables and their relations, you can have a look and find the relations between them in below diagram.<br>
