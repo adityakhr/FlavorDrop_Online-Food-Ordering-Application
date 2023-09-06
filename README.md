@@ -3,7 +3,7 @@ Hello,<br>
 Welcome to the Online Food Ordering Application System, I named it as "FlavorDrop". You can find logo below of my Application.<br>
 <div align="center">
 	<img src=image/FlavorDrop.png style="width:60%" >
-<div/>
+</div>
 <br>
 Here in this project you can find some entity classes which are as follows..<br>
 1. admin
